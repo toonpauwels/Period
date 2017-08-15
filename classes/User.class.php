@@ -27,6 +27,7 @@
                     break;
             }
         }
+
         public function canLogin() {
             try {
                 if (!empty($this->m_sEmail) && !empty($this->m_sPassword)) {
@@ -51,6 +52,7 @@
                     echo  $e->getMessage();
                 }
         }
+
         public function register() {
             if(!empty($this->m_sEmail) && !empty($this->m_sPassword)){
                 try{

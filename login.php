@@ -18,6 +18,7 @@ try {
 catch (Exception $e){
     echo  $e->getMessage();
 }
+
 try {
     if (!empty($_POST)) {
         if (!empty($_POST["emailLogin"]) && !empty($_POST["passwordLogin"])) {
