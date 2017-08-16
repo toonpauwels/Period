@@ -11,16 +11,22 @@ try {
             $user->Password = $_POST["passwordRegister"];
             $user->register();
         } else {
+            if (empty($_POST["emailRegister"])){
+                $err_register1 = "Vul een emailadres in.";
+            }
+            if (empty($_POST["passwordRegister"])){
+                $err_register2 = "Vul een wachtwoord in.";
+            }
 
         }
     }
 }
 catch (Exception $e){
-    echo  $e->getMessage();
+    $err_register3 = $e->getMessage();
 }
 
 try {
-    if (!empty($_POST)) {
+    if (!empty($_POST) && isset($_POST["emailLogin"]) && isset($_POST["passwordLogin"])) {
         if (!empty($_POST["emailLogin"]) && !empty($_POST["passwordLogin"])) {
             $userLogin = new User();
             $userLogin->Email = $_POST["emailLogin"];
@@ -31,12 +37,17 @@ try {
 
             }
         } else {
-            echo 'wa';
+            if (empty($_POST["emailLogin"])){
+                $err_login1 = "Vul een emailadres in.";
+            }
+            if (empty($_POST["passwordLogin"])){
+                $err_login2 = "Vul een wachtwoord in.";
+            }
         }
     }
 }
 catch (Exception $e){
-    echo  $e->getMessage();
+    $err_login3 = $e->getMessage();
 }
 
 ?>
@@ -58,35 +69,51 @@ catch (Exception $e){
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
 
+    <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-<div id="register">
-    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" id="loginform">
-
-        <label for="email">email</label>
-        <input type="text" name="emailRegister" id="email" class="form-control" placeholder="email">
-
-        <label for="password">wachtwoord</label>
-        <input type="password" name="passwordRegister" id="password" class="form-control" placeholder="wachtwoord">
-
-        <button type="submit" class="btn btn-default">Register</button>
+<div class="container">
+    <div class="row">
+<div id="register" class="col">
+        <form action="" method="post" id="registerform" class="justify-content-center">
+        <div class="form-group">
+            <label class="sr-only">Email</label>
+            <input type="text" name="emailRegister" id="defaultForm-email" class="form-control" placeholder="email">
+            <p class="text-danger"><?php if(isset($err_register1)) {echo $err_register1;};?></p>
+            <p class="text-danger"><?php if(isset($err_register3)) {echo $err_register3;};?></p>
+        </div>
+        <div class="form-group">
+            <label class="sr-only">Wachtwoord</label>
+            <input type="password" name="passwordRegister" id="defaultForm-pass" class="form-control" placeholder="wachtwoord">
+            <p class="text-danger"><?php if(isset($err_register2)) {echo $err_register2;};?></p>
+        </div>
+        <div class="text-center">
+            <button type="submit" class="btn btn-default" id="button1">Register</button>
+        </div>
     </form>
-
-
 </div>
 
-<div id="login">
-    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" id="loginform">
 
-        <label for="email">email</label>
-        <input type="text" name="emailLogin" id="email" class="form-control" placeholder="email">
-
-        <label for="password">wachtwoord</label>
-        <input type="password" name="passwordLogin" id="password" class="form-control" placeholder="wachtwoord">
-
-        <button type="submit" class="btn btn-default">log in</button>
+<div id="login" class="col">
+    <form action="" method="post" id="loginform" class="justify-content-center">
+        <div class="form-group">
+            <label class="sr-only">email</label>
+            <input type="text" name="emailLogin" id="email" class="form-control" placeholder="email">
+            <p class="text-danger"><?php if(isset($err_login1)) {echo $err_login1;};?></p>
+            <p class="text-danger"><?php if(isset($error_login3)) {echo $error_login3;};?></p>
+        </div>
+        <div class="form-group">
+            <label class="sr-only">wachtwoord</label>
+            <input type="password" name="passwordLogin" id="password" class="form-control" placeholder="wachtwoord">
+            <p class="text-danger"><?php if(isset($err_login2)) {echo $err_login2;};?></p>
+        </div>
+        <div class="text-center">
+        <button type="submit" class="btn btn-default userbutton">log in</button>
+        </div>
     </form>
 
+</div>
+    </div>
 </div>
 </body>
 </html>

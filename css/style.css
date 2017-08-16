@@ -6,8 +6,17 @@ body{
 
 }
 .container{
-    background-color: #FAFAFA;
-    height: 100vh;
+    background-color: #FCFCFC;
+    height: 100%;
+    min-height:100vh;
+}
+#leftnav{
+    border-right: 1px solid #D6D6D6;
+    min-height: 100vh;
+    height: 100%;
+}
+#topnav {
+    border-bottom: 1px solid #D6D6D6;
 }
 #addlist{
     margin-top: 50px;
@@ -26,4 +35,13 @@ body{
 }
 #lists{
     margin-bottom: 50px;
+}
+#button1{
+    display:block;
+}
+#registerform{
+   padding-top: 100px;
+}
+#loginform{
+    padding-top: 100px;
 }
