@@ -46,13 +46,21 @@
                     $statement->execute();
                     $result = $statement->fetch(PDO::FETCH_ASSOC);
                     if (count($result) > 0 && password_verify($this->m_sPassword, $result['password'])) {
-                        $_SESSION['id'] = $result['id'];
-                        $_SESSION['loggedin'] = true;
+
+                        if($this->m_sEmail == "admin@admin.com") {
+                            $_SESSION['admin'] == true;
+                            return true;
+                        }
+                        if($result['email'] != "admin@admin.com"){
+                            $_SESSION['loggedin'] = true;
                         return true;
-                    } else {
-                        echo "Deze combinatie bestaat niet.";
+                        }
+                    }
+                    else {
+                        throw new Exception("Deze combinatie bestaat niet");
                         return false;
                     }
+
                 }
             }
 

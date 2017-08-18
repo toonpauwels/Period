@@ -32,9 +32,14 @@ try {
             $userLogin->Email = $_POST["emailLogin"];
             $userLogin->Password = $_POST["passwordLogin"];
             if ($userLogin->canLogin()) {
+                if ($_POST["emailLogin"] == "admin@admin.com"){
+                    $_SESSION['admin'] == true;
+                    header('Location: admin.php');
+                }
+                else{
                 $_SESSION['loggedin'] = true;
                 header('Location: index.php');
-
+                }
             }
         } else {
             if (empty($_POST["emailLogin"])){

@@ -9,6 +9,7 @@ else {
 header('Location: login.php');
 }
 
+
 if(!empty($_POST) && isset($_POST["addlist"])){
     try {
         $list = new ListItem();
@@ -37,7 +38,6 @@ if(!empty($_POST) && isset($_POST["titel"]) && isset($_POST["vak"]) && isset($_P
         $task->titel = $_POST["titel"];
         $task->vak = $_POST["vak"];
         $task->datum = $_POST["datum"];
-        $task->listitem = $result["listitem"];
         $task->SaveTask();
     }
     catch( Exception $e ){
@@ -48,6 +48,11 @@ if(!empty($_POST) && isset($_POST["titel"]) && isset($_POST["vak"]) && isset($_P
 
 $list = new ListItem();
 $results = $list->GetLists();
+
+$task = new TaskItem();
+$resultsTasks = $task->GetTasks();
+$today=time();
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -80,25 +85,24 @@ $results = $list->GetLists();
             </form>
 
                 <ul class="list-group" id="lists">
-                <?php foreach($results as $result): ?>
-                    <li class="list-group-item" name="<?php $result["listitem"]?>">
-                        <?php echo $result["listitem"] ?>
-
                         <form action="" method="post" id="addtask" class="form-horizontal">
-                        <div class="form-group">
-                            <input type="text" name="titel" placeholder="titel" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <input type="text" name="vak" placeholder="vak" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <input type="date" name="datum" placeholder="datum" class="form-control">
-                        </div>
-                        <div class="form-group">
-                        <button class="btn pull-right btn-success btn-xs " style="float: right" type="submit"">taak toevoegen</button>
-                        </div>
+                            <?php foreach($results as $result): ?>
+                            <li class="list-group-item" name="<?php $result["listitem"]?>">
+                                <?php echo $result["listitem"] ?>
+                                <div class="form-group">
+                                    <input type="text" name="titel" placeholder="titel" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" name="vak" placeholder="vak" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <input type="date" name="datum" placeholder="datum" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                <button class="btn pull-right btn-success btn-xs " style="float: right" type="submit"">taak toevoegen</button>
+                                </div>
+                            </li>
                         </form>
-                    </li>
                 <?php endforeach; ?>
                 </ul>
 
@@ -118,6 +122,25 @@ $results = $list->GetLists();
                     <li><a href="logout.php" >Logout</a></li>
                 </ul>
             </nav>
+            <ul>
+            <?php foreach($resultsTasks as $resultTask): ?>
+                <li class="list-group-item">
+                    <div class="row">
+                    <div class="text-center col titel"><?php echo $resultTask["titel"] ?></div>
+                    <div class="text-center col vak"><?php echo $resultTask["vak"] ?></div>
+                    <div class="text-center col">
+                        <?php echo $resultTask["datum"] ?>
+                        <div class="text-center col resterend">
+                        <?php
+                        $difference = strtotime($resultTask["datum"]) - $today;
+                        echo floor($difference/60/60/24)." dagen resterend";
+                        ?>
+                        </div>
+                    </div>
+                    </div>
+                </li>
+                <?php endforeach; ?>
+            </ul>
         </div>
     </div>
 </div>
