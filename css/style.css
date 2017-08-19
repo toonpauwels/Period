@@ -42,9 +42,7 @@ body{
 #registerform{
    padding-top: 100px;
 }
-#loginform{
-    padding-top: 100px;
-}
+
 .vak{
     opacity: 0.5;
 }
@@ -54,4 +52,11 @@ body{
 .resterend{
     font-size: 12px;
     opacity: 0.5;
+}
+#login, #register{
+    margin-top: 100px;
+    border: 1px solid lightgrey;
+}
+#loginform, #registerform{
+    padding: 20px;
 }

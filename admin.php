@@ -1,3 +1,37 @@
+<?php
+session_start();
+include_once("classes/User.class.php");
+include_once("classes/Feature.class.php");
+if(isset($_SESSION['admin'])){
+
+}
+else {
+    header('Location: login.php');
+}
+
+if(!empty($_POST) && isset($_POST["addvakken"])){
+    try {
+        $vak = new Vakken();
+        $vak->Vak = $_POST["addvakken"];
+        $vak->SaveVak();
+    }
+    catch( Exception $e ){
+        $error1 = $e->getMessage();
+    }
+}
+
+if(!empty($_POST) && isset($_POST["deletevak"])){
+    try {
+        $vak = new Vakken();
+        $vak->Vak = $_POST["deletevak"];
+        $vak->DeleteVak();
+    }
+    catch( Exception $e ){
+        $error2 = $e->getMessage();
+    }
+}
+?>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -21,6 +55,24 @@
             <li><a href="logout.php" >Logout</a></li>
         </ul>
     </nav>
+    <form action="" method="post" id="addvakken" class="form-horizontal bottom col-6">
+        <div class="form-group">
+            <input type="text" name="addvakken" placeholder="voeg een vak toe" class="form-control">
+            <p class="text-danger"><?php if(isset($error1)) {echo $error1;};?></p>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-success btn-block">voeg toe</button>
+        </div>
+    </form>
+    <form action="" method="post" id="deletevak" class="form-horizontal bottom col-6">
+        <div class="form-group">
+            <input type="text" name="deletevak" placeholder="vak verwijderen" class="form-control">
+            <p class="text-danger"><?php if(isset($error2)) {echo $error2;};?></p>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-warning btn-block">verwijder vak</button>
+        </div>
+    </form>
 </div>
 
 </body>

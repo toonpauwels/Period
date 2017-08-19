@@ -33,7 +33,7 @@ try {
             $userLogin->Password = $_POST["passwordLogin"];
             if ($userLogin->canLogin()) {
                 if ($_POST["emailLogin"] == "admin@admin.com"){
-                    $_SESSION['admin'] == true;
+                    $_SESSION['admin'] = true;
                     header('Location: admin.php');
                 }
                 else{
@@ -79,45 +79,44 @@ catch (Exception $e){
 <body>
 <div class="container">
     <div class="row">
-<div id="register" class="col">
-        <form action="" method="post" id="registerform" class="justify-content-center">
-        <div class="form-group">
-            <label class="sr-only">Email</label>
-            <input type="text" name="emailRegister" id="defaultForm-email" class="form-control" placeholder="email">
-            <p class="text-danger"><?php if(isset($err_register1)) {echo $err_register1;};?></p>
-            <p class="text-danger"><?php if(isset($err_register3)) {echo $err_register3;};?></p>
+        <div id="register" class="col">
+                <form action="" method="post" id="registerform" class="justify-content-center">
+                <div class="form-group">
+                    <label class="sr-only">Email</label>
+                    <input type="text" name="emailRegister" id="defaultForm-email" class="form-control" placeholder="email">
+                    <p class="text-danger"><?php if(isset($err_register1)) {echo $err_register1;};?></p>
+                    <p class="text-danger"><?php if(isset($err_register3)) {echo $err_register3;};?></p>
+                </div>
+                <div class="form-group">
+                    <label class="sr-only">Wachtwoord</label>
+                    <input type="password" name="passwordRegister" id="defaultForm-pass" class="form-control" placeholder="wachtwoord">
+                    <p class="text-danger"><?php if(isset($err_register2)) {echo $err_register2;};?></p>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-default" id="button1">Register</button>
+                </div>
+            </form>
         </div>
-        <div class="form-group">
-            <label class="sr-only">Wachtwoord</label>
-            <input type="password" name="passwordRegister" id="defaultForm-pass" class="form-control" placeholder="wachtwoord">
-            <p class="text-danger"><?php if(isset($err_register2)) {echo $err_register2;};?></p>
-        </div>
-        <div class="text-center">
-            <button type="submit" class="btn btn-default" id="button1">Register</button>
-        </div>
-    </form>
-</div>
 
 
-<div id="login" class="col">
-    <form action="" method="post" id="loginform" class="justify-content-center">
-        <div class="form-group">
-            <label class="sr-only">email</label>
-            <input type="text" name="emailLogin" id="email" class="form-control" placeholder="email">
-            <p class="text-danger"><?php if(isset($err_login1)) {echo $err_login1;};?></p>
-            <p class="text-danger"><?php if(isset($error_login3)) {echo $error_login3;};?></p>
+        <div id="login" class="col">
+            <form action="" method="post" id="loginform" class="justify-content-center">
+                <div class="form-group">
+                    <label class="sr-only">email</label>
+                    <input type="text" name="emailLogin" id="email" class="form-control" placeholder="email">
+                    <p class="text-danger"><?php if(isset($err_login1)) {echo $err_login1;};?></p>
+                    <p class="text-danger"><?php if(isset($error_login3)) {echo $error_login3;};?></p>
+                </div>
+                <div class="form-group">
+                    <label class="sr-only">wachtwoord</label>
+                    <input type="password" name="passwordLogin" id="password" class="form-control" placeholder="wachtwoord">
+                    <p class="text-danger"><?php if(isset($err_login2)) {echo $err_login2;};?></p>
+                </div>
+                <div class="text-center">
+                <button type="submit" class="btn btn-default userbutton">Log in</button>
+                </div>
+            </form>
         </div>
-        <div class="form-group">
-            <label class="sr-only">wachtwoord</label>
-            <input type="password" name="passwordLogin" id="password" class="form-control" placeholder="wachtwoord">
-            <p class="text-danger"><?php if(isset($err_login2)) {echo $err_login2;};?></p>
-        </div>
-        <div class="text-center">
-        <button type="submit" class="btn btn-default userbutton">log in</button>
-        </div>
-    </form>
-
-</div>
     </div>
 </div>
 </body>

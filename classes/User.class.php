@@ -57,7 +57,7 @@
                         }
                     }
                     else {
-                        throw new Exception("Deze combinatie bestaat niet");
+                        throw new Exception("Deze combinatie bestaat niet.");
                         return false;
                     }
 

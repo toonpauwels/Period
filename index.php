@@ -53,6 +53,9 @@ $task = new TaskItem();
 $resultsTasks = $task->GetTasks();
 $today=time();
 
+$vak = new Vakken();
+$resultsvakken = $vak->GetVakken();
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -93,7 +96,11 @@ $today=time();
                                     <input type="text" name="titel" placeholder="titel" class="form-control">
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" name="vak" placeholder="vak" class="form-control">
+                                    <select class="selectpicker" name="vak">
+                                    <?php foreach($resultsvakken as $resultVak): ?>
+                                        <option><?php echo $resultVak["vak"]; ?></option>
+                                    <?php endforeach; ?>
+                                    </select>
                                 </div>
                                 <div class="form-group">
                                     <input type="date" name="datum" placeholder="datum" class="form-control">
@@ -114,6 +121,7 @@ $today=time();
                 <div class="form-group">
                     <button type="submit" class="btn btn-warning btn-block">verwijder</button>
                 </div>
+            </form>
         </div>
 
         <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
